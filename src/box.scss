@@ -1,0 +1,137 @@
+@use "utils";
+
+.box {
+  width: 10rem;
+  aspect-ratio: 1/1;
+  border: 0.3rem solid #000;
+
+  @include utils.flexCenter();
+
+  position: relative;
+  // left: 20rem; 
+  // transform: rotate(45deg);
+
+  border-radius: 50%;
+
+  box-shadow: 1rem 1rem 1rem #000,
+  1rem 1rem 0rem #a605e5,
+  2rem 2rem 0rem #05e5e5,
+  -1rem -1rem 0rem #05e5e5;
+
+  transition: 2s ease-in-out; //此处如何自定义：打开网页找到inspection找到此处参数 调整加复制参数
+  // animation: moveAndrotate 1s linear infinite;
+
+  &:hover {
+    background-color: #a605e5;
+    color: #fff;
+    border: 0.3rem dashed #fff;
+    transform: perspective(50rem)rotate(45deg) rotateY(45deg) translateZ(10rem);
+
+    &::before {
+      transform:  translateX(100%);
+    }
+  }
+
+  &::before {
+
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.3rem;
+    background-color: red;
+    top: 100%;
+    transition: 1s;
+  }
+
+  &::after {
+
+    content: "";
+  
+  
+  }
+
+  
+
+}
+
+@keyframes move{
+  0% {
+    transform: translate(0, 0);
+
+  }
+  25% {
+    transform: translate(10rem, 10rem);
+
+  }
+  50% {
+    transform: translate(0, 20rem);
+  }
+  75%{
+    transform: translate(-10rem, 10rem);
+  }
+  100% {
+    transform: translate(0, 0);
+
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+//由于transform和transform函数之间不能兼容 如果想结合move和rotate的效果 必须写成以下形式
+@keyframes moveAndrotate{
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+
+  }
+  25% {
+    transform: translate(10rem, 10rem) rotate(90deg);
+
+  }
+  50% {
+    transform: translate(0, 20rem) rotate(180deg);
+  }
+  75%{
+    transform: translate(-10rem, 10rem) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+
+  }
+}
+// .box:hover {
+//   background-color: #a605e5;
+//   color: #fff;
+//   border: 0.3rem dashed #fff;
+//   transform: rotate(45deg);
+// }
+
+// 以下表示 如果box做hover其before需要怎么变化
+// .box:hover::before {
+//   transform: translateX(100%);
+// }
+// 以下俩个element跟随box，随着box的改变而改变 对其作用也同时对box作用
+// content是一定需要存在的 不需要则写成空的; 不设置则不会出现对应的虚拟
+// .box::before {
+
+//   content: "";
+//   position: absolute;
+//   width: 100%;
+//   height: 0.3rem;
+//   background-color: red;
+//   top: 100%;
+//   transition: 1s;
+// }
+
+// .box::after {
+
+//   content: "";
+
+
+// }
